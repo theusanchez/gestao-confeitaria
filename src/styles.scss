@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-family: Quattrocento, "Helvetica Neue", sans-serif;
+  background-color: #ffcccd;
+}
+.app-title {
+  font-family: "Crafty Girls";
+}

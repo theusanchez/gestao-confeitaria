@@ -1,0 +1,166 @@
+<form name="pedidoForm" #pedidoForm="ngForm" novalidate>
+  <mat-card class="client-card">
+    <mat-card-title class="card-title">Informações do Cliente</mat-card-title>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Contato</mat-label>
+          <input name="contato" #contato="ngModel" matInput [(ngModel)]="pedido.cliente.contato" required />
+          <mat-error *ngIf="contato.errors?.required && (contato.touched || contato.dirty)">O contato é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Cliente</mat-label>
+          <input name="nome" #nome="ngModel" matInput [(ngModel)]="pedido.cliente.nome" required>
+          <mat-error *ngIf="nome.errors?.required && (nome.touched || nome.dirty)">O nome é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Indicação</mat-label>
+          <mat-select name="captacao" #captacao="ngModel" [(ngModel)]="pedido.cliente.captacao">
+            <mat-option value=""></mat-option>
+            <mat-option value="Instagram">Instagram</mat-option>
+            <mat-option value="Indicacao">Indicação</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="pedido.cliente.captacao === 'Indicacao'">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input name="nome" #nome="ngModel" matInput [(ngModel)]="pedido.cliente.nome" required>
+            <mat-error *ngIf="nome.errors?.required && (nome.touched || nome.dirty)">O nome é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="product-card">
+    <mat-card-title class="card-title">Informações do Pedido</mat-card-title>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Tema</mat-label>
+          <input name="tema" #tema="ngModel" matInput [(ngModel)]="pedido.tema" required>
+          <mat-error *ngIf="tema.errors?.required && (tema.touched || tema.dirty)">O tema é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <!-- <mat-form-field appearance="outline">
+  <mat-label>Elos</mat-label>
+  <input matInput>
+</mat-form-field> -->
+
+    <!-- <mat-form-field appearance="outline">
+  <mat-label>Cores</mat-label>
+  <input matInput>
+</mat-form-field> -->
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Pedido</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of items" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Horário de Entrega</mat-label>
+          <input name="hr" #hr="ngModel" matInput [(ngModel)]="horario" required>
+          <mat-error *ngIf="hr.errors?.required && (hr.touched || hr.dirty)">O horário é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-button-toggle-group name="tipo" #tipo="ngModel" class="toggle-button-pai w-100"
+          [(ngModel)]="pedido.entrega.tipo">
+          <mat-button-toggle class="toggle-button-filho" value="Retirada">Retirada</mat-button-toggle>
+          <mat-button-toggle class="toggle-button-filho" value="Entrega">Entrega</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+
+    <div *ngIf="pedido.entrega.tipo === 'Entrega'">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Local de Entrega</mat-label>
+            <input name="endereco" #endereco="ngModel" matInput [(ngModel)]="pedido.entrega.endereco" required>
+            <mat-error *ngIf="endereco.errors?.required && (endereco.touched || endereco.dirty)">O endereço de entrega é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Frete</mat-label>
+            <input name="valorFrete" #valorFrete="ngModel" matInput [(ngModel)]="pedido.entrega.valorFrete" required>
+            <mat-error *ngIf="valorFrete.errors?.required && (valorFrete.touched || valorFrete.dirty)">O valor do frete
+              é obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Valor do Pedido</mat-label>
+          <input name="valorPedido" #valorPedido="ngModel" matInput [(ngModel)]="pedido.valorPedido" required>
+          <mat-error *ngIf="valorPedido.errors?.required && (valorPedido.touched || valorPedido.dirty)">O valor do
+            pedido é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Valor Pago</mat-label>
+          <input matInput name="valorPago" required>
+          <!-- <mat-error *ngIf="valorPago.errors?.required && (valorPago.touched || valorPago.dirty)">O valor do frete é obrigatório</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Observações</mat-label>
+          <textarea matInput name="observacoes" #observacoes="ngModel" placeholder="Recheio: Brigadeiro..."
+            [(ngModel)]="pedido.observacoes"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button type="submit" class="w-100" mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+  </mat-card>
+</form>
