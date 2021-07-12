@@ -1,0 +1,65 @@
+<form class="example-form">
+    <mat-radio-group name="tipoProduto" aria-label="Select an option" matInput [(ngModel)]="produto.tipoProduto">
+        <div class="container-radius">
+            <mat-radio-button value="Doce">Doce</mat-radio-button>
+            <mat-radio-button value="Bolo">Bolo</mat-radio-button>
+            <mat-radio-button value="Kit">Kit</mat-radio-button>
+        </div>
+    </mat-radio-group>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Produto</mat-label>
+        <input matInput placeholder="Ex. Cookie" name="nome" #nome="ngModel" matInput [(ngModel)]="produto.nome"
+            required>
+        <mat-error *ngIf="nome.errors?.required && (nome.touched || nome.dirty)">O nome é obrigatório
+        </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="produto.tipoProduto === 'Doce'">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Qtd Minima</mat-label>
+            <input matInput placeholder="10 Unidades" name="qtdMinima" #qtdMinima="ngModel" matInput
+                [(ngModel)]="produto.qtdMinima" required>
+            <mat-error *ngIf="qtdMinima.errors?.required && (qtdMinima.touched || qtdMinima.dirty)">A qtd minima é
+                obrigatória
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="produto.tipoProduto === 'Bolo'">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Tipo do Bolo</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let bolo of bolos" [value]="bolo.value">
+                    {{bolo.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="produto.tipoProduto === 'Kit'">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Conteúdo do Kit</mat-label>
+
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Valor</mat-label>
+        <input matInput placeholder="50 Reais" name="valor" #valor="ngModel" matInput [(ngModel)]="produto.valor"
+            required>
+        <mat-error *ngIf="valor.errors?.required && (valor.touched || valor.dirty)">O valor é
+            obrigatório
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Link Foto Produto</mat-label>
+        <input matInput
+            placeholder="https://drive.google.com/file/d/0ByYva5U4G3CMek5DV2dWNDNiUUk/view?usp=sharing&resourcekey=0-j1RNcDh0HYvWFbIbW385Yw"
+            name="linkFotoProduto" #linkFotoProduto="ngModel" matInput [(ngModel)]="produto.linkFotoProduto" required>
+        <mat-error *ngIf="linkFotoProduto.errors?.required && (linkFotoProduto.touched || linkFotoProduto.dirty)">O link
+            é obrigatório
+        </mat-error>
+    </mat-form-field>
+    <button type="submit" class="w-100" mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+</form>

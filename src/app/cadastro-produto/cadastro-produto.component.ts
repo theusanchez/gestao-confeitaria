@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'cadastro-produto',
   templateUrl: './cadastro-produto.component.html',
   styleUrls: ['./cadastro-produto.component.scss'],
 })
+
 export class CadastroProdutoComponent implements OnInit {
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   produtos = [
     {
@@ -90,6 +93,57 @@ export class CadastroProdutoComponent implements OnInit {
       conjunto: [],
     },
   ];
-
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CadastroProdutoModal, {
+      width: '250px',
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+    
+  }
+  
   ngOnInit(): void {}
+}
+
+interface Bolos {
+  value: string;
+  viewValue: string;
+}
+
+interface IProduto {
+  tipoBolo: string;
+  tipoProduto: string;
+  nome: string;
+  valor: number;
+  qtdMinima: number;
+  linkFotoProduto: string; 
+ }
+
+@Component({
+  selector: 'cadastro-produto-modal',
+  templateUrl: 'cadastro-produto-modal.html',
+  styleUrls: ['./cadastro-produto.component.scss']
+})
+
+export class CadastroProdutoModal {
+
+  constructor() { }
+  submitted = false;
+
+  bolos: Bolos[] = [
+    {value: 'naked', viewValue: 'Naked'},
+    {value: 'ganache', viewValue: 'Ganache'},
+  ];
+
+  produto = {
+    
+  } as IProduto;
+
+  onSave() {
+    this.submitted = true;
+    console.log(this.produto);
+  }
 }

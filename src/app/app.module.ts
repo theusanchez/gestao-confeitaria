@@ -18,8 +18,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { MatIconModule } from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CadastroProdutoModal } from './cadastro-produto/cadastro-produto.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 @NgModule({
-  declarations: [AppComponent, FormComponent, CadastroProdutoComponent],
+  declarations: [AppComponent, FormComponent, CadastroProdutoComponent, CadastroProdutoModal],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,6 +40,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
